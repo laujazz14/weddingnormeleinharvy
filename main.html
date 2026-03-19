@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding</title>
+
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+
+<!-- AOS Animation -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Lightbox -->
+<link href="https://cdn.jsdelivr.net/npm/lightbox2/dist/css/lightbox.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/lightbox2/dist/js/lightbox.min.js"></script>
+
+</head>
+
+<body>
+
+<div id="config-container"></div>
+
+<script>
+fetch('config.html')
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById('config-container').innerHTML = data;
+  });
+</script>
+
+<style>
+/* GENERAL */
+body{font-family:'Poppins',sans-serif;background:#fffaf6;color:#5a4a42;overflow-x:hidden;}
+*{margin:0;padding:0;box-sizing:border-box;}
+
+/* NAVBAR */
+nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);z-index:50;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+nav ul{display:flex;justify-content:center;gap:30px;padding:15px;flex-wrap:wrap;}
+nav ul li a{text-decoration:none;color:#5a4a42;font-weight:600;transition:0.3s;}
+nav ul li a:hover{color:#d63384;}
+html{scroll-behavior:smooth;}
+
+/* HERO */
+.hero{
+  height:100vh;
+  background:url('https://asset-2.tribunnews.com/tribunnews/foto/bank/originals/Contoh-Foto-Prewedding-yang-Diedit-Pakai-Gemini-AI.jpg') center/cover no-repeat fixed;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;color:#fff;text-align:center;position:relative;
+}
+.hero h1{
+  font-family:'Playfair Display', serif;
+  font-size:60px;
+  background:linear-gradient(90deg,#ff758c,#ff7eb3);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.hero p{font-size:24px;margin-top:10px;font-style:italic;}
+.countdown{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+
+/* COUNTDOWN CARDS */
+.countdown div{background:linear-gradient(45deg,#d63384,#ff4d6d);color:white;padding:15px 20px;border-radius:12px;text-align:center;transition:0.3s;}
+.countdown div div:first-child{font-size:20px;font-weight:bold;}
+
+/* SECTIONS */
+section{padding:80px 20px;text-align:center;max-width:900px;margin:auto;border-radius:12px;background:#fffaf6;margin-bottom:30px;box-shadow:0 4px 15px rgba(0,0,0,0.05);}
+section h2{font-family:'Playfair Display';font-size:36px;margin-bottom:20px;color:#b08968;}
+section p, section li{font-size:20px;line-height:1.6;}
+.card{border:1px solid #ddd;padding:20px;width:250px;border-radius:12px;box-shadow:0 4px 15px rgba(0,0,0,0.05);}
+.grid{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
+
+/* DRESS */
+.dress img{width:100%;height:500px;object-fit:cover;border-radius:12px;}
+
+/* VENUE SLIDER */
+.slider{overflow:hidden;max-width:900px;margin:auto;position:relative;}
+.slides{display:flex;transition:0.5s;}
+.venue-card{min-width:100%;position:relative;border-radius:12px;overflow:hidden;}
+.venue-card img{width:100%;height:320px;object-fit:cover;transition:0.5s;}
+.venue-card:hover img{transform:scale(1.05);}
+.overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);display:flex;flex-direction:column;justify-content:center;align-items:center;}
+.overlay h3{font-family:'Playfair Display';font-size:28px;color:#fff;}
+.venue-btn{margin-top:10px;padding:10px 20px;background:linear-gradient(45deg,#ff4d6d,#6a5acd);color:#fff;text-decoration:none;border-radius:8px;}
+.dots{margin-top:10px;}
+.dot{height:10px;width:10px;background:#ccc;border-radius:50%;display:inline-block;margin:5px;cursor:pointer;}
+.dot.active{background:#fff;}
+
+/* BUTTONS */
+button, .venue-btn, .bottom-btn{border:none;border-radius:25px;padding:12px 25px;cursor:pointer;transition:0.3s;box-shadow:0 0 15px rgba(255,255,255,0.6);}
+button:hover,.venue-btn:hover,.bottom-btn:hover{transform:scale(1.05);}
+.bottom-btn{background:#d63384;color:#fff;text-decoration:none;}
+
+/* RSVP FORM */
+form{display:flex;flex-direction:column;gap:10px;max-width:400px;margin:auto;}
+input,select,textarea,button{padding:10px;border:1px solid #ccc;border-radius:8px;width:100%;}
+button{background:#d63384;color:white;font-weight:600;}
+
+/* SPARKLES & PETALS */
+.sparkles span{position:fixed;width:5px;height:5px;background:white;border-radius:50%;animation:float 6s linear infinite;opacity:0.7;}
+@keyframes float{0%{transform:translateY(100vh);}100%{transform:translateY(-10vh);}}
+.petal{position:fixed;top:-10px;width:20px;height:20px;background:url('https://pngimg.com/uploads/rose/rose_PNG66854.png') no-repeat center/cover;animation:fall linear infinite;}
+@keyframes fall{0%{transform:translateY(-10vh);}100%{transform:translateY(110vh);}}
+
+/* MUSIC BUTTON FIXED */
+.music-btn{
+  position:fixed;
+  bottom:15px;
+  right:15px;
+  width:45px;
+  height:45px;
+  background:#ff4d6d;
+  color:#fff;
+  border:none;
+  border-radius:50%;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  z-index:999;
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+  transition:0.3s;
+}
+
+.music-btn:hover{
+  transform:scale(1.1);
+}
+
+/* SEARCH */
+#search{padding:10px;border:1px solid #ccc;border-radius:8px;width:80%;margin:auto;display:block;margin-bottom:20px;}
+
+/* MEDIA QUERIES */
+@media(max-width:1024px){.hero h1{font-size:48px;} .hero p{font-size:20px;}}
+@media(max-width:768px){
+  .hero h1{font-size:36px;} 
+  .countdown div{padding:10px 12px;font-size:14px;}
+  nav ul{gap:15px;flex-wrap:wrap;}
+  .grid{flex-direction:column;align-items:center;}
+  .slides{flex-direction:column;}
+}
+@media(max-width:480px){
+  .hero{height:70vh;}
+  form input, form select, form textarea, form button{width:100%;}
+  .dress img{height:300px;}
+  .venue-card img{height:200px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<ul>
+<li><a href="#story">Our Story</a></li>
+<li><a href="#details">Details</a></li>
+<li><a href="#dress">Dress</a></li>
+<li><a href="#venue">Venue</a></li>
+<li><a href="#Seating Arrangement">Seating Arrangement</a></li>
+<li><a href="#rsvp">Join Our Guest List</a></li>
+</ul>
+</nav>
+
+<!-- EFFECTS -->
+<div id="sparkles"></div>
+<audio id="bgMusic" autoplay loop src="music.mp3"></audio>
+<button onclick="toggleMusic()" class="music-btn" id="musicBtn">🔊</button>
+
+<!-- HERO -->
+<div class="hero" data-aos="fade-in">
+<h1>Normelein & Harvy</h1>
+<p>April 12, 2026</p>
+<div class="countdown" id="countdown"></div>
+</div>
+
+<!-- STORY -->
+<section id="story" data-aos="fade-up" class="flex flex-col md:flex-row items-center gap-10">
+  <div class="md:w-1/2">
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h2>Our Story</h2>
+      <p>From strangers to forever ❤️</p>
+      <p>He thought little of it, dismissing it as a long shot. Yet, just days later, a message arrived that would forever change his life - and his heart. They bonded over hobbies and shared interests. Soon, Linden visited KC with surprises like Dumaguete's signature buko pies. On March 14, 2020, KC confirmed they were officially together. Amid distance, they stayed close through messages. Eventually, in the Terrazas de Flores Botanical Garden, Linden proposed. KC said Yes!! 💍</p>
+    </div>
+  </div>
+  <div class="md:w-1/2">
+    <img src="https://i.pinimg.com/originals/8f/85/f5/8f85f54fe57f5ebb86434996e49db346.jpg" 
+         alt="Couple Image" 
+         class="rounded-xl shadow-lg w-full object-cover h-full" data-aos="zoom-in">
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section id="details" data-aos="fade-up">
+<h2>Wedding Details</h2>
+<div class="flex justify-center gap-6 flex-wrap">
+  <div class="card text-center p-6">
+    <h3 class="font-bold text-xl mb-2">Ceremony</h3>
+    <p class="text-lg">3:00 PM</p>
+  </div>
+  <div class="card text-center p-6">
+    <h3 class="font-bold text-xl mb-2">Reception</h3>
+    <p class="text-lg">6:00 PM</p>
+  </div>
+</div>
+</section>
+
+<!-- DRESS -->
+<section id="dress" data-aos="fade-up" class="dress">
+<h2>Dress Code</h2>
+<img src="https://i.pinimg.com/originals/ea/a9/d0/eaa9d063e28348081122b6aee5cfb274.jpg" alt="Dress Code">
+<p><b>Please avoid casual attire. No black & white, no mini dresses. Dress elegantly according to our theme. Thank you!</b></p>
+</section>
+
+<!-- GIFT -->
+<section data-aos="fade-up">
+<h2>Gift Guide</h2>
+<p>Your presence is all we request. If you wish to give, monetary gift is preferred.</p>
+</section>
+
+<!-- VENUE -->
+<section id="venue" data-aos="fade-up">
+<h2>The Venue</h2>
+<div class="slider">
+<div class="slides">
+  <div class="venue-card">
+    <a href="https://images.unsplash.com/photo-1560448075-bb485b067938" data-lightbox="venue">
+      <img src="https://images.unsplash.com/photo-1560448075-bb485b067938" alt="Reception">
+    </a>
+    <div class="overlay">
+      <h3>RECEPTION</h3>
+      <a href="https://maps.google.com?q=Arcadia+Davao" target="_blank" class="venue-btn">VIEW MAP</a>
+    </div>
+  </div>
+  <div class="venue-card">
+    <a href="https://images.unsplash.com/photo-1586773860418-d37222d8fce3" data-lightbox="venue">
+      <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3" alt="Ceremony">
+    </a>
+    <div class="overlay">
+      <h3>CEREMONY</h3>
+      <a href="https://maps.google.com?q=San+Pedro+Davao" target="_blank" class="venue-btn">VIEW MAP</a>
+    </div>
+  </div>
+</div>
+<div class="dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+</div>
+</div>
+<a href="#" class="bottom-btn">View Dumaguete Wedding Details</a>
+</section>
+<!-- SEATING ARRANGEMENT -->
+<section id="Seating Arrangement" data-aos="fade-up">
+  <h2 class="title text-3xl mb-10">Seating Arrangement</h2>
+
+  <!-- FLOOR PLAN IMAGE -->
+  <div style="max-width:800px;margin:auto;">
+    <img src="https://images.template.net/521787/Round-Table-Wedding-Seating-Chart-Template-edit-online.png" 
+         alt="Seating Map" 
+         style="width:100%;border-radius:12px;margin-bottom:30px;">
+    <p style="margin-top:10px;font-style:italic;color:#555;">
+      Here's a map to help you find your table easily 💌
+    </p>
+  </div>
+
+  <!-- SEARCH -->
+  <input type="text" id="search" placeholder="Search your name..."
+  class="p-3 border rounded w-80 mb-10">
+
+  <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+    <!-- TABLE 1 -->
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h3 class="title text-2xl mb-4">Table 1</h3>
+      <ul class="space-y-2">
+        <li>Juan Dela Cruz</li>
+        <li>Maria Santos</li>
+        <li>Pedro Reyes</li>
+        <li>Ana Lopez</li>
+      </ul>
+    </div>
+
+    <!-- TABLE 2 -->
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h3 class="title text-2xl mb-4">Table 2</h3>
+      <ul class="space-y-2">
+        <li>Mark Lee</li>
+        <li>Lisa Kim</li>
+        <li>John Smith</li>
+        <li>Jane Doe</li>
+      </ul>
+    </div>
+
+    <!-- TABLE 3 -->
+    <div class="bg-white p-6 rounded-xl shadow-lg">
+      <h3 class="title text-2xl mb-4">Table 3</h3>
+      <ul class="space-y-2">
+        <li>Chris Evans</li>
+        <li>Scarlett Johansson</li>
+        <li>Robert Downey</li>
+        <li>Tom Holland</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp" data-aos="fade-up">
+<h2 class="title text-3xl mb-4">Join Our Guest List</h2>
+
+<form action="submit.php" method="POST">
+  <input name="name" required placeholder="Your Name">
+  <input name="email" required placeholder="Email">
+  <select name="attending" required>
+    <option value="">Will you attend?</option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+  <textarea name="message" placeholder="Message"></textarea>
+  <button>Submit</button>
+</form>
+</section>
+
+<!-- SCRIPTS -->
+<script>
+AOS.init({duration:1000});
+
+// COUNTDOWN
+const target = new Date("Apr 12, 2026 15:00:00").getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const gap = target - now;
+  if(gap<=0){document.getElementById("countdown").innerHTML="Wedding started!"; return;}
+  const days=Math.floor(gap/(1000*60*60*24));
+  const hours=Math.floor((gap%(1000*60*60*24))/(1000*60*60));
+  const minutes=Math.floor((gap%(1000*60*60))/(1000*60));
+  const seconds=Math.floor((gap%(1000*60))/1000);
+  document.getElementById("countdown").innerHTML=`<div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+  ${['Days','Hours','Minutes','Seconds'].map((label,i)=>`<div style="background:linear-gradient(45deg,#d63384,#ff4d6d);color:white;padding:15px 20px;border-radius:12px;text-align:center;"><div style="font-size:20px;font-weight:bold;">${[days,hours,minutes,seconds][i].toString().padStart(2,'0')}</div><div>${label}</div></div>`).join('')}
+  </div>`;
+}
+updateCountdown(); setInterval(updateCountdown,1000);
+
+// SLIDER
+let index=0;
+const slides=document.querySelector(".slides");
+const dots=document.querySelectorAll(".dot");
+function showSlide(i){index=i;slides.style.transform="translateX("+(-i*100)+"%)";dots.forEach(d=>d.classList.remove("active"));dots[i].classList.add("active");}
+dots.forEach((dot,i)=>dot.onclick=()=>showSlide(i));
+setInterval(()=>{index=(index+1)%2;showSlide(index);},4000);
+
+// SPARKLES
+for(let i=0;i<40;i++){let s=document.createElement("span");s.style.left=Math.random()*100+"vw";s.classList.add("sparkles");s.style.animationDuration=(Math.random()*5+3)+"s";document.body.appendChild(s);}
+// PETALS
+for(let i=0;i<15;i++){let p=document.createElement("div");p.className="petal";p.style.left=Math.random()*100+"vw";p.style.animationDuration=(Math.random()*5+5)+"s";document.body.appendChild(p);}
+// MUSIC
+function toggleMusic(){
+  let m = document.getElementById("bgMusic");
+  let btn = document.getElementById("musicBtn");
+
+  if(m.paused){
+    m.play();
+    btn.innerHTML = "🔊";
+  } else {
+    m.pause();
+    btn.innerHTML = "🔇";
+  }
+}
+
+// CONFETTI HEART ON CLICK
+document.body.addEventListener('click', e=>{
+  const heart = document.createElement('div');
+  heart.style.position='absolute';
+  heart.style.left=e.pageX+'px';
+  heart.style.top=e.pageY+'px';
+  heart.innerHTML='❤️';
+  heart.style.fontSize='24px';
+  heart.style.opacity=1;
+  document.body.appendChild(heart);
+  let op=1; let top=e.pageY;
+  let id=setInterval(()=>{op-=0.02; top--; heart.style.top=top+'px'; heart.style.opacity=op; if(op<=0){heart.remove(); clearInterval(id);}},16);
+});
+
+// SEARCH TABLES
+document.getElementById("search")?.addEventListener("keyup", function() {
+  let val = this.value.toLowerCase();
+  document.querySelectorAll(".grid li").forEach(li=>{
+    li.style.display = li.textContent.toLowerCase().includes(val) ? "" : "none";
+  });
+});
+</script>
+</body>
+</html>

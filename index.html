@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Wedding Invite</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+
+<style>
+body, html {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('1.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-text {
+  position: relative;
+  color: white;
+  cursor: pointer;
+  padding: 0 20px;
+}
+
+/* Invitation text */
+.invitation-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeUp 2s forwards;
+}
+
+/* Names */
+.hero-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  margin:0;
+  opacity: 0;
+  animation: fadeUp 2s 0.5s forwards;
+}
+
+/* Tap to enter */
+.tap-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  margin-top: 10px;
+  opacity:0;
+  animation: fadeUp 2s 1s forwards;
+}
+
+/* Fade up animation */
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px);}
+  to { opacity:1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media (max-width:1024px){
+  .hero-text h1{ font-size:4rem; }
+  .invitation-text{ font-size:1.8rem; }
+  .tap-text{ font-size:1.3rem; }
+}
+@media (max-width:768px){
+  .hero-text h1{ font-size:3rem; }
+  .invitation-text{ font-size:1.5rem; }
+  .tap-text{ font-size:1.1rem; }
+}
+@media (max-width:480px){
+  .hero-text h1{ font-size:2.2rem; }
+  .invitation-text{ font-size:1.2rem; }
+  .tap-text{ font-size:1rem; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+  <div class="hero-text" onclick="go()">
+    <p class="invitation-text">You are cordially invited to the wedding</p>
+    <h1>Normelein & Harvy</h1>
+<p class="tap-text">Tap to Enter &#128141;</p>
+
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function go(){
+  let music = document.getElementById("music");
+  music.play().then(()=> console.log("Music playing"))
+       .catch(err=> console.log(err));
+
+  setTimeout(()=> window.location='main.html',2000);
+}
+</script>
+
+</body>
+</html>
