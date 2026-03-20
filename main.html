@@ -18,8 +18,7 @@
 <!-- Lightbox -->
 <link href="https://cdn.jsdelivr.net/npm/lightbox2/dist/css/lightbox.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lightbox2/dist/js/lightbox.min.js"></script>
-</head>
-<body>
+
 <style>
 /* GENERAL */
 body{font-family:'Poppins',sans-serif;background:#fffaf6;color:#5a4a42;overflow-x:hidden;}
@@ -91,31 +90,24 @@ button{background:#d63384;color:white;font-weight:600;}
 .petal{position:fixed;top:-10px;width:20px;height:20px;background:url('https://pngimg.com/uploads/rose/rose_PNG66854.png') no-repeat center/cover;animation:fall linear infinite;}
 @keyframes fall{0%{transform:translateY(-10vh);}100%{transform:translateY(110vh);}}
 
-/* MUSIC BUTTON FIXED */
 .music-btn{
   position:fixed;
-  bottom:15px;
-  right:15px;
-  width:45px;
-  height:45px;
+  bottom:20px;
+  right:20px;
   background:#ff4d6d;
   color:#fff;
   border:none;
+  padding:12px;
   border-radius:50%;
-  font-size:18px;
+  cursor:pointer;
+
+  z-index:9999;          /* ⭐ always on top */
+  width:55px;            /* ⭐ same size always */
+  height:55px;
   display:flex;
   align-items:center;
   justify-content:center;
-  cursor:pointer;
-  z-index:999;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
-  transition:0.3s;
 }
-
-.music-btn:hover{
-  transform:scale(1.1);
-}
-
 /* SEARCH */
 #search{padding:10px;border:1px solid #ccc;border-radius:8px;width:80%;margin:auto;display:block;margin-bottom:20px;}
 
@@ -153,7 +145,7 @@ button{background:#d63384;color:white;font-weight:600;}
 <!-- EFFECTS -->
 <div id="sparkles"></div>
 <audio id="bgMusic" autoplay loop src="music.mp3"></audio>
-<button onclick="toggleMusic()" class="music-btn" id="musicBtn">🔊</button>
+<button onclick="toggleMusic()" class="music-btn">🔊</button>
 
 <!-- HERO -->
 <div class="hero" data-aos="fade-in">
@@ -293,23 +285,6 @@ button{background:#d63384;color:white;font-weight:600;}
   </div>
 </section>
 
-<!-- RSVP -->
-<section id="rsvp" data-aos="fade-up">
-<h2 class="title text-3xl mb-4">Join Our Guest List</h2>
-
-<form action="submit.php" method="POST">
-  <input name="name" required placeholder="Your Name">
-  <input name="email" required placeholder="Email">
-  <select name="attending" required>
-    <option value="">Will you attend?</option>
-    <option value="Yes">Yes</option>
-    <option value="No">No</option>
-  </select>
-  <textarea name="message" placeholder="Message"></textarea>
-  <button>Submit</button>
-</form>
-</section>
-
 <!-- SCRIPTS -->
 <script>
 AOS.init({duration:1000});
@@ -343,18 +318,7 @@ for(let i=0;i<40;i++){let s=document.createElement("span");s.style.left=Math.ran
 // PETALS
 for(let i=0;i<15;i++){let p=document.createElement("div");p.className="petal";p.style.left=Math.random()*100+"vw";p.style.animationDuration=(Math.random()*5+5)+"s";document.body.appendChild(p);}
 // MUSIC
-function toggleMusic(){
-  let m = document.getElementById("bgMusic");
-  let btn = document.getElementById("musicBtn");
-
-  if(m.paused){
-    m.play();
-    btn.innerHTML = "🔊";
-  } else {
-    m.pause();
-    btn.innerHTML = "🔇";
-  }
-}
+function toggleMusic(){let m=document.getElementById("bgMusic"); m.paused?m.play():m.pause();}
 
 // CONFETTI HEART ON CLICK
 document.body.addEventListener('click', e=>{
@@ -378,5 +342,31 @@ document.getElementById("search")?.addEventListener("keyup", function() {
   });
 });
 </script>
+
+<!-- RSVP (NO DATABASE) -->
+<section id="rsvp">
+<h2 class="text-3xl mb-4">Join Our Guest List</h2>
+
+<form onsubmit="return fakeSubmit(event)" class="max-w-md mx-auto flex flex-col gap-3">
+
+<input required placeholder="Your Name" class="p-2 border rounded">
+<input required placeholder="Email" class="p-2 border rounded">
+
+<select required class="p-2 border rounded">
+<option value="">Will you attend?</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+
+<textarea placeholder="Message" class="p-2 border rounded"></textarea>
+
+<button class="bg-pink-600 text-white p-2 rounded">
+Submit RSVP
+</button>
+
+</form>
+</section>
+
+<script>
 </body>
 </html>
