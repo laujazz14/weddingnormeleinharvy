@@ -18,21 +18,8 @@
 <!-- Lightbox -->
 <link href="https://cdn.jsdelivr.net/npm/lightbox2/dist/css/lightbox.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/lightbox2/dist/js/lightbox.min.js"></script>
-
 </head>
-
 <body>
-
-<div id="config-container"></div>
-
-<script>
-fetch('config.html')
-  .then(res => res.text())
-  .then(data => {
-    document.getElementById('config-container').innerHTML = data;
-  });
-</script>
-
 <style>
 /* GENERAL */
 body{font-family:'Poppins',sans-serif;background:#fffaf6;color:#5a4a42;overflow-x:hidden;}
